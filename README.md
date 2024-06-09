@@ -1,6 +1,6 @@
 # syncwellness
 
-A new Flutter project.
+"SyncWellness" a platform that helps users synchronize their various wellness practices, whether it's fitness routines, mindfulness exercises, nutrition plans, or other healthy habits, to promote a cohesive and balanced approach to wellness.
 
 ## Getting Started
 
