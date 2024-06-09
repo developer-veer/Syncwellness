@@ -1,86 +1,54 @@
 import 'package:flutter/material.dart';
 
-import '../widgets/activity_box.dart';
+import 'package:syncwellness/screens/workouts_screen.dart';
 
-class HomeScreen extends StatelessWidget {
+import '../widgets/activity_box.dart';
+import 'calories_screen.dart';
+import 'devices_screen.dart';
+import 'health_screen.dart';
+import 'me_screen.dart';
+
+class HomeScreen extends StatefulWidget {
+  @override
+  _HomeScreenState createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  int _currentIndex = 0;
+  final List<Widget> _screens = [
+    HealthScreen(),
+    WorkoutsScreen(),
+    DevicesScreen(),
+    MeScreen(),
+  ];
+
+  void _navigateTo(int index) {
+    setState(() {
+      _currentIndex = index;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Health'),
+        title: const Text('SyncWellness'),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Expanded(
-                  child: ActivityBox(
-                    title: 'Steps',
-                    value: '299/4000 steps',
-                    color: Colors.orange,
-                    icon: Icons.directions_walk,
-                  ),
-                ),
-                SizedBox(width: 10),
-                Expanded(
-                  child: ActivityBox(
-                    title: 'Calories',
-                    value: '13/300 kcal',
-                    color: Colors.green,
-                    icon: Icons.local_fire_department,
-                  ),
-                ),
-                SizedBox(width: 10),
-                Expanded(
-                  child: ActivityBox(
-                    title: 'Workout Duration',
-                    value: '0/30 min',
-                    color: Colors.blue,
-                    icon: Icons.timer,
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(height: 20),
-            GestureDetector(
-              onTap: () {
-                // Navigate to detailed workout plan
-              },
-              child: Container(
-                padding: EdgeInsets.all(16),
-                decoration: BoxDecoration(
-                  color: Colors.grey[900],
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: Row(
-                  children: [
-                    Icon(Icons.fitness_center, color: Colors.white),
-                    SizedBox(width: 10),
-                    Expanded(
-                      child: Text(
-                        'Your exclusive plan report has been generated.',
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    ),
-                    Icon(Icons.arrow_forward, color: Colors.orange),
-                  ],
-                ),
-              ),
-            ),
-            // Add other widgets like Workout List, Weight, etc. here similarly
-          ],
-        ),
-      ),
+      body:_screens[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
-        items: [
+        currentIndex: _currentIndex,
+        unselectedIconTheme: const IconThemeData(color: Colors.white),
+        backgroundColor:  Colors.green,
+
+        onTap: _navigateTo,
+        items: const [
           BottomNavigationBarItem(
+            backgroundColor: Colors.green,
             icon: Icon(Icons.favorite),
             label: 'Health',
           ),
           BottomNavigationBarItem(
+
             icon: Icon(Icons.directions_run),
             label: 'Workouts',
           ),
@@ -93,9 +61,10 @@ class HomeScreen extends StatelessWidget {
             label: 'Me',
           ),
         ],
-        selectedItemColor: Colors.orange,
-        unselectedItemColor: Colors.white,
-        backgroundColor: Colors.black,
+
+        selectedItemColor: Theme.of(context).bottomNavigationBarTheme.selectedItemColor,
+        unselectedItemColor: Theme.of(context).bottomNavigationBarTheme.unselectedItemColor,
+        //backgroundColor: Theme.of(context).bottomNavigationBarTheme.backgroundColor,
       ),
     );
   }

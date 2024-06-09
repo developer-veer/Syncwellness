@@ -10,7 +10,9 @@ class SyncWellnessApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'SyncWellness',
+      color: Colors.white,
       theme: AppTheme.lightTheme,
       home: HomeScreen(),
     );
