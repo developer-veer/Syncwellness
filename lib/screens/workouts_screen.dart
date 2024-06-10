@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:syncwellness/screens/workouts/workout_screen.dart';
 
 class WorkoutsScreen extends StatelessWidget {
   @override
@@ -7,9 +8,7 @@ class WorkoutsScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text('Workouts'),
       ),
-      body: Center(
-        child: Text('Workouts Screen', style: TextStyle(color: Colors.white)),
-      ),
+      body: WorkoutScreenAll()
     );
   }
 }
