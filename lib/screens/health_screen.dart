@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:syncwellness/screens/steps_screen.dart';
-import 'package:syncwellness/screens/workout_screen.dart';
+
 import 'package:syncwellness/widgets/glassicBackgroundWidget.dart';
 
 import '../widgets/activity_box.dart';
@@ -24,7 +24,9 @@ class HealthScreen extends StatelessWidget {
                 text: '',
               ),
             ),
-
+            SizedBox(
+              height: 20,
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
@@ -65,13 +67,7 @@ class HealthScreen extends StatelessWidget {
                 const SizedBox(width: 10),
                 Expanded(
                   child: GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => WorkoutScreen()),
-                      );
-                    },
+                    onTap: () {},
                     child: const ActivityBox(
                       title: 'Workout Duration',
                       value: '0/30 min',

@@ -7,12 +7,13 @@ class DistanceDisplay extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(
-      '$distance km',
-      style: TextStyle(
-        fontSize: 48,
-        fontWeight: FontWeight.bold,
-      ),
+    return Column(
+      children: [
+        Text(
+          '$distance km',
+          style: TextStyle(fontSize: 48, fontWeight: FontWeight.bold),
+        ),
+      ],
     );
   }
 }

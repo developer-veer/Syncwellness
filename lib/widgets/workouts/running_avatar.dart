@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 
 class RunningAvatar extends StatelessWidget {
+  const RunningAvatar({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return Icon(
+    return const Icon(
       Icons.directions_run,
-      size: 100,
-      color: Colors.orange,
+      size: 30,
+      color: Colors.white,
     );
   }
 }

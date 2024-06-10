@@ -22,8 +22,8 @@ class ActivitySelector extends StatelessWidget {
           child: Text(
             activity,
             style: TextStyle(
-              color: selectedIndex == index ? Colors.orange : Colors.grey,
-              fontSize: 18,
+              color: index == selectedIndex ? Colors.orange : Colors.grey,
+              fontWeight: FontWeight.bold,
             ),
           ),
         );
