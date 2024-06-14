@@ -56,7 +56,7 @@ class _HeartRateScreenState extends State<HeartRateScreen>
       _heartRate = 0;
     });
 
-    _timer = Timer.periodic(Duration(seconds: 1), (timer) {
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       setState(() {
         _heartRate = 60 + Random().nextInt(40); // Simulate heart rate between 60-100 BPM
       });
@@ -74,7 +74,7 @@ class _HeartRateScreenState extends State<HeartRateScreen>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Heart Rate Monitor'),
+        title: const Text('Heart Rate Monitor'),
         backgroundColor: Colors.redAccent,
       ),
       body: Center(
@@ -94,24 +94,23 @@ class _HeartRateScreenState extends State<HeartRateScreen>
               _measuring ? 'Measuring...' : 'Heart Rate',
               style: TextStyle(fontSize: 24, color: Colors.black54),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Text(
               _measuring ? '$_heartRate BPM' : '-- BPM',
-              style: TextStyle(fontSize: 48, fontWeight: FontWeight.bold),
+              style: const TextStyle(fontSize: 48, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 50),
             ElevatedButton(
               onPressed: _measuring ? null : _startMeasuring,
               style: ElevatedButton.styleFrom(
-                padding: EdgeInsets.symmetric(horizontal: 40, vertical: 20),
-                primary: Colors.redAccent,
+                padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 20), backgroundColor: Colors.redAccent,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(30),
                 ),
               ),
               child: Text(
                 _measuring ? 'Measuring' : 'Start',
-                style: TextStyle(fontSize: 20, color: Colors.white),
+                style: const TextStyle(fontSize: 20, color: Colors.white),
               ),
             ),
           ],

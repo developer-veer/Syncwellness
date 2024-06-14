@@ -63,7 +63,7 @@ class _WalkingActivityScreenState extends State<WalkingActivityScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
+            const Text(
               'Real-time Walking Distance:',
               style: TextStyle(fontSize: 24),
             ),
