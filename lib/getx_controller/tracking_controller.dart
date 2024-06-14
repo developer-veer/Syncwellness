@@ -8,19 +8,26 @@ import 'package:pedometer/pedometer.dart';
 class TrackingController extends GetxController {
   var isTracking = false.obs;
   var stepsCount = 0.obs;
+  var activityType = "unknown".obs;
   var distanceWalked = 0.0.obs;
   late Stream<StepCount> _stepCountStream;
-  late StreamSubscription<ActivityEvent> _activityStreamSubscription;
+  late StreamSubscription<Activity> _activityStreamSubscription;
   late StreamSubscription<StepCount> _stepCountStreamSubscription;
 
   @override
   void onInit() {
     super.onInit();
+    _initializeActivityRecognition();
     _initializePedometer();
   }
 
   void _initializePedometer() {
     _stepCountStream = Pedometer.stepCountStream;
+  }
+
+  void _initializeActivityRecognition() {
+    _activityStreamSubscription =
+        FlutterActivityRecognition.instance.activityStream.listen(_onActivity);
   }
 
   void startTracking() {
@@ -31,8 +38,6 @@ class TrackingController extends GetxController {
     distanceWalked.value = 0.0;
 
     _stepCountStreamSubscription = _stepCountStream.listen(_onStepCount);
-    _activityStreamSubscription =
-        FlutterActivityRecognition.instance.activityStream.listen(_onActivity);
   }
 
   void stopTracking() {
@@ -45,12 +50,22 @@ class TrackingController extends GetxController {
 
   void _onStepCount(StepCount event) {
     stepsCount.value = event.steps;
-    distanceWalked.value = stepsCount.value * 0.8; // Average step length in meters
+    distanceWalked.value =
+        stepsCount.value * 0.8; // Average step length in meters
   }
 
-  void _onActivity(ActivityEvent activity) {
+  void _onActivity(Activity activity) {
     if (activity.type == ActivityType.WALKING) {
-      // Additional logic can be implemented if needed
+      activityType.value = activity.type.toString();
+      if (activity.type != ActivityType.WALKING) {
+        // Pause step counting when not walking
+        _stepCountStreamSubscription.pause();
+      } else {
+        // Resume step counting when walking
+        if (_stepCountStreamSubscription.isPaused) {
+          _stepCountStreamSubscription.resume();
+        }
+      }
     }
   }
 

@@ -2,14 +2,13 @@ import 'package:flutter/material.dart';
 import '../../widgets/workouts/distance_display.dart';
 import '../../widgets/workouts/walking_avatar.dart';
 
-
 class WalkingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
         Container(
-          decoration: BoxDecoration(
+          decoration: const BoxDecoration(
             image: DecorationImage(
               image: AssetImage('assets/workouts.jpg'),
               fit: BoxFit.cover,
@@ -27,7 +26,8 @@ class WalkingScreen extends StatelessWidget {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => WalkingActivityScreen()),
+                    MaterialPageRoute(
+                        builder: (context) => WalkingActivityScreen()),
                   );
                 },
                 child: WalkingAvatar(),
