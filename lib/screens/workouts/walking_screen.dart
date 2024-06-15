@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:syncwellness/screens/workouts/walking_activity_screen.dart';
 import '../../widgets/workouts/distance_display.dart';
 import '../../widgets/workouts/walking_avatar.dart';
 
@@ -41,49 +42,6 @@ class WalkingScreen extends StatelessWidget {
           ],
         ),
       ],
-    );
-  }
-}
-
-class WalkingActivityScreen extends StatefulWidget {
-  @override
-  _WalkingActivityScreenState createState() => _WalkingActivityScreenState();
-}
-
-class _WalkingActivityScreenState extends State<WalkingActivityScreen> {
-  double distance = 0.0;
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Walking Activity'),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'Real-time Walking Distance:',
-              style: TextStyle(fontSize: 24),
-            ),
-            SizedBox(height: 20),
-            Text(
-              '$distance km',
-              style: TextStyle(fontSize: 48, fontWeight: FontWeight.bold),
-            ),
-            SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () {
-                setState(() {
-                  distance += 1.0; // Simulating distance change
-                });
-              },
-              child: Text('Increase Distance'),
-            ),
-          ],
-        ),
-      ),
     );
   }
 }
