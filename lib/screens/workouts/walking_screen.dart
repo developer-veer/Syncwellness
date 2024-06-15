@@ -11,7 +11,7 @@ class WalkingScreen extends StatelessWidget {
         Container(
           decoration: const BoxDecoration(
             image: DecorationImage(
-              image: AssetImage('assets/workouts.jpg'),
+              image: AssetImage('Assets/images/running_pic.jpg'),
               fit: BoxFit.cover,
             ),
           ),
