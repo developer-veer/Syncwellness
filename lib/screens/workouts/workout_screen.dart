@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:syncwellness/screens/workouts/walking_screen.dart';
 import '../../widgets/workouts/activity_selector.dart';
 import 'running_screen.dart';
 import 'cycling_screen.dart';
-import 'walking_screen.dart';
 import 'rope_skipping_screen.dart';
 
 class WorkoutScreenAll extends StatefulWidget {

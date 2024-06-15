@@ -1,12 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import '../../getx_controller/tracking_controller.dart';
 
-class WalkingActivityScreen extends StatelessWidget {
+class WalkingActivityScreen extends StatefulWidget {
+  @override
+  _WalkingActivityScreenState createState() => _WalkingActivityScreenState();
+}
+
+class _WalkingActivityScreenState extends State<WalkingActivityScreen> {
   final TrackingController _trackingController = Get.put(TrackingController());
 
-  WalkingActivityScreen({super.key});
+  @override
+  void initState() {
+    super.initState();
+    _trackingController.requestPermissions();
+  }
 
   @override
   Widget build(BuildContext context) {
