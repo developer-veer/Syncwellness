@@ -1,52 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../widgets/workouts/distance_display.dart';
-import '../../widgets/workouts/running_avatar.dart';
+import 'package:get/get.dart';
+import '../../getx_controller/running_controller.dart';
 
-class RunningScreen extends StatelessWidget {
-  const RunningScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        Container(
-          decoration: BoxDecoration(
-            image: DecorationImage(
-              fit: BoxFit.fill,
-              image: AssetImage('Assets/images/run.jpg'),
-            ),
-          ),
-        ),
-        Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Spacer(),
-            Padding(
-              padding: const EdgeInsets.only(top: 420.0),
-              child: Center(
-                child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => RunningActivityScreen()),
-                    );
-                  },
-                  style: ElevatedButton.styleFrom(
-                    shape: const CircleBorder(), backgroundColor: Colors.orange,
-                    padding: const EdgeInsets.all(20), // Button color
-                  ),
-                  child: RunningAvatar(),
-                ),
-              ),
-            ),
-            Spacer(),
-          ],
-        ),
-      ],
-    );
-  }
-}
 
 class RunningActivityScreen extends StatefulWidget {
   const RunningActivityScreen({super.key});
@@ -56,13 +11,19 @@ class RunningActivityScreen extends StatefulWidget {
 }
 
 class _RunningActivityScreenState extends State<RunningActivityScreen> {
-  double distance = 0.0;
+  final RunningController _runningController = Get.put(RunningController());
+
+  @override
+  void initState() {
+    super.initState();
+    _runningController.requestPermissions();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Running Activity'),
+        title: const Text('Running Activity Tracker'),
       ),
       body: Center(
         child: Column(
@@ -73,18 +34,25 @@ class _RunningActivityScreenState extends State<RunningActivityScreen> {
               style: TextStyle(fontSize: 24),
             ),
             SizedBox(height: 20),
-            Text(
-              '$distance km',
-              style: const TextStyle(fontSize: 48, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 20),
+            Obx(() {
+              return Text(
+                '${_runningController.distanceRun.value.toStringAsFixed(2)} km',
+                style: TextStyle(fontSize: 48, fontWeight: FontWeight.bold),
+              );
+            }),
+            SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
-                setState(() {
-                  distance += 1.0; // Simulating distance change
-                });
+                _runningController.startTracking();
               },
-              child: const Text('Increase Distance'),
+              child: Text('Start Tracking'),
+            ),
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                _runningController.stopTracking();
+              },
+              child: Text('Stop Tracking'),
             ),
           ],
         ),

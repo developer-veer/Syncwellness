@@ -15,7 +15,7 @@ class _WorkoutScreenState extends State<WorkoutScreenAll> {
   int _selectedIndex = 0;
 
   List<Widget> _screens = [
-    RunningScreen(),
+    RunningActivityScreen(),
     CyclingScreen(),
     WalkingScreen(),
     RopeSkippingScreen(),
